@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width = device-width, initial-scale =1.0" />
+    <title>Debaroti | Profile</title>
+    <style>
+      /* Modern CSS Variables & Resets */
+      :root {
+        --bg-primary: #7837988e; /* Soft pastel lavender-gray base */
+        --text-primary: #3c1e2e; /* Deep plum-espresso for readability */
+        --accent-teal: #4ca3a9; /* Elegant pastel teal from your dress */
+        --accent-berry: #682278; /* Soft matching berry/magenta tone */
+        --card-bg: rgba(196, 221, 235, 0.75); /* Clean frosted glass effect */
+      }
+      body {
+        background-color: var(--bg-primary);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-primary);
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+        transition: all 0.4s ease;
+      }
+
+      .profile-card {
+        background: var(--card-bg);
+        max-width: 600px;
+        width: 100%;
+        padding: 30px;
+        border-radius: 24px; /* Slightly softer corners */
+        box-shadow: 0 12px 40px rgba(60, 30, 46, 0.06); /* Tinted shadow to match text */
+        backdrop-filter: blur(12px);
+        text-align: center;
+      }
+
+      /* 1. Add layout spacing to your button container */
+      .btn-group {
+        display: flex;
+        gap: 12px; /* Adds a soft horizontal space between your individual buttons */
+        justify-content: center; /* Keeps the buttons centered inside the card layout */
+        margin-top: 25px; /* Pushes the buttons comfortably away from your bio text */
+        margin-bottom: 30px; /* Creates a distinct, beautiful separation above the quote box */
+      }
+
+      /* 2. Add structural margin to the heading and paragraphs */
+      h1 {
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+
+      .bio-text {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-top: 0;
+        margin-bottom: 0; /* Let your .btn-group's margin-top handle the clean separation */
+      }
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 8px 20px rgba(60, 30, 46, 0.1);
+      }
+
+      .username {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(
+          --accent-berry
+        ); /* Berry color looks amazing for sub-handles */
+        margin: 5px 0 15px;
+      }
+
+      /* Updated Button Group Styles */
+      button,
+      .link-btn {
+        background: white;
+        border: 1px solid rgba(76, 163, 169, 0.2); /* Soft teal border outline */
+        padding: 10px 22px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .instagram-link {
+        color: var(
+          --accent-teal
+        ) !important; /* Changes Instagram text to match your gorgeous teal */
+      }
+
+      button:hover,
+      .link-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(76, 163, 169, 0.15);
+        border-color: var(--accent-teal);
+      }
+
+      #mood-btn {
+        background: var(--accent-teal);
+        color: white;
+        border: none;
+      }
+
+      #mood-btn:hover {
+        background: #60adb3; /* Smooth, slightly darker teal hover state */
+      }
+
+      /* Dynamic Quote Box Accent Line */
+      .dynamic-box {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 25px;
+        border-radius: 16px;
+        font-style: italic;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 4px solid var(--accent-berry); /* Berry colored accent bar */
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-card">
+      <div class="avatar-container">
+        <img
+          src="Images/IMG-20260318-WA0071.jpg"
+          alt="Debaroti's photo"
+          class="avatar"
+        />
+      </div>
+      <h1>Debaroti Deb Nath</h1>
+      <p class="username">@debaroti.deb.nath</p>
+
+      <p class="bio-text">
+        Exploring the beaury of clean logic, structured web design, and
+        scripting. Currently oranizing a dedicated learning space and mapping
+        out frontend artchitectures while diving into interactive programming!
+      </p>
+
+      <div class="btn-group">
+        <a
+          href="http://www.instagram.com/debaroti.deb.nath/"
+          target="_blank"
+          class="link-btn instagram-link"
+        >
+          🅾 Instagram
+        </a>
+        <a href="about.html" class="link-btn">💗 About Me</a>
+        <button id="mood-btn">🎥 Spark Inspiration</button>
+      </div>
+
+      <div class="dynamic-box" id="inspiration-container">
+        Click the button above to cycle through some favourite programming
+        philosophies!
+      </div>
+    </div>
+    <script>
+      const expressions = [
+        "“First, solve the problem. Then, write the code.” – John Johnson",
+        "“Simplicity is the soul of efficiency.” – Austin Freeman",
+        "“Clean code always looks like it was written by someone who cares.” – Michael Feathers",
+        "“The best way to predict the future is to invent it.” – Alan Kay",
+      ];
+
+      const moodBtn = document.getElementById("mood-btn");
+      const displayBox = document.getElementById("inspiration-container");
+
+      moodBtn.addEventListener("click", () => {
+        //Pick a random line from our collection
+        const randomIndex = Math.floor(Math.random() * expressions.length);
+        displayBox.textContent = expressions[randomIndex];
+
+        //Add a subtle pop animation effect via scaling
+        displayBox.style.transform = "scale(1.02)";
+        setTimeout(() => (displayBox.style.transform = "scale(1)"), 150);
+      });
+    </script>
+  </body>
+</html>
